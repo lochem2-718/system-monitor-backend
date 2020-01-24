@@ -8,15 +8,16 @@ import (
 	"system-monitor-backend/models"
 
 	"system-monitor-backend/routers"
+	"system-monitor-backend/config"
 
-	"github.com/joho/godotenv"
 )
 
 func main() {
-	// Load config file into environment variables
-	err := godotenv.Load()
+	// Load config
+	config, err := config.NewConfig()
 	panicIfErr(err)
-	logFileName := os.Getenv("LOG_FILE")
+	
+	logFileName := config.GetSetting("LOG_FILE")
 	if logFileName == "" {
 		logFileName = "server.log"
 	}
@@ -26,20 +27,20 @@ func main() {
 	log.SetOutput(file)
 
 	// Set up db
-	dbPort, err := strconv.Atoi(os.Getenv("DB_PORT"))
+	dbPort, err := strconv.Atoi(config.GetSetting("DB_PORT"))
 	panicIfErr(err)
 
 	dbConfig := db.Config{
-		DbHost:     os.Getenv("DB_HOST"),
+		DbHost:     config.GetSetting("DB_HOST"),
 		Port:       dbPort,
-		SslMode:    os.Getenv("DB_SSL_MODE"),
-		DbName:     os.Getenv("DB_NAME"),
-		DbUser:     os.Getenv("DB_USER"),
-		DbPassword: os.Getenv("DB_PASSWORD"),
+		SslMode:    config.GetSetting("DB_SSL_MODE"),
+		DbName:     config.GetSetting("DB_NAME"),
+		DbUser:     config.GetSetting("DB_USER"),
+		DbPassword: config.GetSetting("DB_PASSWORD"),
 	}
 	database := db.ConnectToDb(dbConfig)
 	var userStore *models.UserStore = &database
-	serverPort, err := strconv.Atoi(os.Getenv("SERVER_PORT"))
+	serverPort, err := strconv.Atoi(config.GetSetting("SERVER_PORT"))
 	panicIfErr(err)
 	routers.Run(userStore, serverPort)
 }

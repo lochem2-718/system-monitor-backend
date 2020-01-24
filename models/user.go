@@ -11,7 +11,7 @@ type User struct {
 // UserStore -- An interface to represent a database store for users
 type UserStore interface {
 	CreateUser(username string) User
-	ReadUser(user User) Result
-	UpdateUser(user User) Result
-	DeleteUser(username string) Result
+	ReadUser(user User) error
+	UpdateUser(user User) error
+	DeleteUser(username string) error
 }

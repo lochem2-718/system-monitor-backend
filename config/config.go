@@ -10,7 +10,7 @@ type Config struct {
 	settingsPairs map[string]string
 }
 
-func NewConfig() Config, err {
+func NewConfig() (Config, error) {
 	settingsPairs, err := godotenv.Read("server.env")
 	return Config{
 		settingsPairs: settingsPairs,

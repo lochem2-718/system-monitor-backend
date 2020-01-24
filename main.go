@@ -5,18 +5,16 @@ import (
 	"os"
 	"strconv"
 	"system-monitor-backend/db"
-	"system-monitor-backend/models"
 
-	"system-monitor-backend/routers"
 	"system-monitor-backend/config"
-
+	"system-monitor-backend/routers"
 )
 
 func main() {
 	// Load config
 	config, err := config.NewConfig()
 	panicIfErr(err)
-	
+
 	logFileName := config.GetSetting("LOG_FILE")
 	if logFileName == "" {
 		logFileName = "server.log"
@@ -39,10 +37,9 @@ func main() {
 		DbPassword: config.GetSetting("DB_PASSWORD"),
 	}
 	database := db.ConnectToDb(dbConfig)
-	var userStore *models.UserStore = &database
 	serverPort, err := strconv.Atoi(config.GetSetting("SERVER_PORT"))
 	panicIfErr(err)
-	routers.Run(userStore, serverPort)
+	routers.Run(database, serverPort)
 }
 
 func panicIfErr(err error) {

@@ -10,7 +10,7 @@ import (
 )
 
 // Run - Starts server's router
-func Run(userStore *models.UserStore, port int) {
+func Run(userStore models.UserStore, port int) {
 	corsPolicy := cors.New(cors.Options{
 		AllowedOrigins:   []string{"https://monitor.weinberger.systems"},
 		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE"},

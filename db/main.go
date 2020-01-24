@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	_ "system-monitor-backend/models"
 
 	// Drivers required for postgres
 	_ "github.com/lib/pq"

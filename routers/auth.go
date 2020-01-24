@@ -8,7 +8,7 @@ import (
 )
 
 // BuildAuthRouter -- builds and returns an auth router
-func BuildAuthRouter(userStore *models.UserStore) *chi.Mux {
+func BuildAuthRouter(userStore models.UserStore) *chi.Mux {
 	apiRouter := chi.NewRouter()
 	apiRouter.Use(middleware.SetHeader("Content-Type", "application/json"))
 

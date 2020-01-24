@@ -1,6 +1,7 @@
 package db
 
 import (
+	"errors"
 	"system-monitor-backend/models"
 )
 
@@ -10,16 +11,16 @@ func (db Database) CreateUser(username string) models.User {
 }
 
 // ReadUser -- A function to create a user in the database
-func (db Database) ReadUser(user models.User) models.Result {
-	return models.Failure
+func (db Database) ReadUser(user models.User) error {
+	return errors.New("I'm not implemented yet")
 }
 
 // UpdateUser -- A function to create a user in the database
-func (db Database) UpdateUser(user models.User) models.Result {
-	return models.Failure
+func (db Database) UpdateUser(user models.User) error {
+	return errors.New("I'm not implemented yet")
 }
 
 // DeleteUser -- A function to create a user in the database
-func (db Database) DeleteUser(username string) models.Result {
-	return models.Failure
+func (db Database) DeleteUser(username string) error {
+	return errors.New("I'm not implemented yet")
 }

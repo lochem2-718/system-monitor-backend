@@ -1,7 +1,7 @@
 package routers
 
 import (
-	"models"
+	"system-monitor-backend/models"
 
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
